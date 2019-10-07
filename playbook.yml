@@ -1,0 +1,38 @@
+---
+- hosts: servers
+  remote_user: root
+  vars:
+    weak_account_key: 930140_658c63b5e1799e9941b22b66365a088a
+  tasks:
+  - name: Install BOINC
+    apt:
+      name: boinc-client
+      state: latest
+  - name: Temporarily stop BOINC
+    systemd:
+      name: boinc-client
+      state: stopped
+  - name: Global preferences override
+    copy:
+      src: global_prefs_override.xml
+      dest: "/etc/boinc-client/global_prefs_override.xml"
+      owner: root
+      group: boinc
+      mode: 0644
+  - name: Start BOINC
+    systemd:
+      name: boinc-client
+      enabled: yes
+      masked: no
+      state: started
+  - name: Check BOINC attached
+    shell: "boinccmd --get_project_urls"
+    changed_when: false
+    register: projects
+  - name: Attach to primegrid
+    shell: "boinccmd --project_attach http://www.primegrid.com/ {{ weak_account_key }}"
+    when: projects.stdout.find('http') == -1
+    register: attached
+  - debug:
+      msg: Blah {{ attached }}
+  
