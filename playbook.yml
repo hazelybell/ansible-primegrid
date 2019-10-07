@@ -32,7 +32,14 @@
   - name: Attach to primegrid
     shell: "boinccmd --project_attach http://www.primegrid.com/ {{ weak_account_key }}"
     when: projects.stdout.find('http') == -1
+  - name: Wait for boinc-client to get some tasks
+    wait_for:
+      path: /var/lib/boinc-client/slots/0
+  - name: Check primegrid tasks
+    shell: "boinccmd --get_tasks"
+    changed_when: false
+    register: tasks
     register: attached
-  - debug:
-      msg: Blah {{ attached }}
-  
+  - debug: var=tasks.stdout_lines
+
+

@@ -44,5 +44,11 @@ ansible-playbook playbook.yml
 
 This will use ssh public key authentication automatically.
 
+## What happens
+
+For all the hosts specified in the hosts file, the script will
+install boinc-client, configure it, and attach it to your primegrid account.
+boinc-client should then do the rest. Last, it prints out the currently
+running tasks on each host.
 
 
