@@ -32,6 +32,8 @@ Add your the VMs public IP addresses to hosts.yml. Example:
 servers:
   hosts:
     165.22.141.67:
+    134.209.62.95:
+    165.22.152.128:
   vars:
     ansible_python_interpreter: /usr/bin/python3
     ansible_connection: ssh

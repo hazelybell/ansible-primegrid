@@ -1,0 +1,18 @@
+<app_config>
+ <app>
+  <name>llr321</name>
+  <fraction_done_exact>1</fraction_done_exact>
+  <report_results_immediately>1</report_results_immediately>
+ </app>
+ <app_version>
+  <app_name>llr321</app_name>
+  <cmdline>-t 3</cmdline>
+  <avg_ncpus>3</avg_ncpus>
+ </app_version>
+ <app_version>
+  <app_name>llr321</app_name>
+  <cmdline>-t 3</cmdline>
+  <avg_ncpus>3</avg_ncpus>
+  <plan_class>mt</plan_class>
+ </app_version>
+</app_config>

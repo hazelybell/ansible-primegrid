@@ -19,6 +19,13 @@
       owner: root
       group: boinc
       mode: 0644
+  - name: LLR threading settings
+    copy:
+      src: app_config.xml
+      dest: "/var/lib/boinc-client/projects/www.primegrid.com/app_config.xml"
+      owner: root
+      group: boinc
+      mode: 0644
   - name: Start BOINC
     systemd:
       name: boinc-client
@@ -39,7 +46,6 @@
     shell: "boinccmd --get_tasks"
     changed_when: false
     register: tasks
-    register: attached
   - debug: var=tasks.stdout_lines
 
 
